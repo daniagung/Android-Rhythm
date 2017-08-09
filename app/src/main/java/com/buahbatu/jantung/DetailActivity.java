@@ -1,6 +1,9 @@
 package com.buahbatu.jantung;
 
 import android.graphics.RectF;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -103,6 +106,9 @@ public class DetailActivity extends AppCompatActivity {
     private String username;
     private String deviceId;
 
+    private MediaPlayer mediaPlayer;
+    private boolean ringtoneIsIdle = true;
+
     void setupMqttCallBack(){
         mqttClient.setCallback(new MqttCallback() {
             @Override
@@ -112,7 +118,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
+//                System.out.println("Message Arrived!: " + topic + ": " + new String(message.getPayload()));
                 String[] splitedTopic = topic.split("/");
                 switch (splitedTopic[1]) {
                     case "bpm":
@@ -128,12 +134,17 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                     case "alert":
                         String alertString = new String(message.getPayload());
-                        /*[TITLE, DETAIL, CONDITION]*/
+                        alertString = alertString.substring(1, alertString.length()-1);
                         String[] splittedAlert = alertString.split("#");
 
+//                        System.out.println("Message Arrived!: " + splittedAlert[0] + "--" + alertString);
+
+                        /*[TITLE, DETAIL, CONDITION]*/
                         Notification notification = new Notification(
                                 String.format(Locale.US, splittedAlert[0], username),
                                 splittedAlert[1], Integer.parseInt(splittedAlert[2]));
+
+                        System.out.println("ASEM!: " + notification.getTitle() + "--" + splittedAlert[2].toString());
 
                         alertTitle.setText(notification.getTitle());
                         alertDetail.setText(notification.getDetail());
@@ -143,9 +154,11 @@ public class DetailActivity extends AppCompatActivity {
                                 break;
                             case Notification.SICK:
                                 alertImage.setImageResource(R.drawable.ic_error_yellow);
+                                soundOnDrop();
                                 break;
                             case Notification.DANGER:
                                 alertImage.setImageResource(R.drawable.ic_error_red);
+                                soundOnDrop();
                                 break;
                         }
                         break;
@@ -288,6 +301,14 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    private void soundOnDrop(){
+        if (ringtoneIsIdle){
+            ringtoneIsIdle = false;
+
+            mediaPlayer.start();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -332,6 +353,24 @@ public class DetailActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
         }
+
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        // media player
+        this.mediaPlayer = MediaPlayer.create(getApplicationContext(), sound);
+        this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                ringtoneIsIdle = true;
+            }
+        });
+        this.mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                ringtoneIsIdle = true;
+                return true;
+            }
+        });
 
         /*DETAIL INFORMATION*/
         setupDetail();

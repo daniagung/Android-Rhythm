@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 AppSetting.showProgressDialog(LoginActivity.this, "Logging in");
 
+                Log.i("LOGIN", "onLoginClick: " + AppSetting.getHttpAddress(LoginActivity.this)
+                        +"/{user}" + getString(R.string.login_url));
+
                 AndroidNetworking.post(AppSetting.getHttpAddress(LoginActivity.this)
                         +"/{user}" + getString(R.string.login_url))
                         .addPathParameter("user", "patient")
