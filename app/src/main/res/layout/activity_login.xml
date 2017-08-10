@@ -9,16 +9,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.buahbatu.jantung.LoginActivity">
+    android:background="@color/colorPrimary"
+    tools:context="com.buahbatu.jantung.LoginActivity"
+    android:weightSum="1">
 
     <ImageView
         android:contentDescription="@string/app_name"
         android:id="@+id/logo_jantung"
         android:layout_gravity="center"
-        android:src="@drawable/ic_pulse"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:src="@drawable/logosquare"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.80" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_user_name"
@@ -26,7 +28,7 @@
         android:layout_height="wrap_content">
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="10dp"
             android:inputType="textPersonName"
             android:hint="@string/username"/>
     </android.support.design.widget.TextInputLayout>
@@ -36,16 +38,19 @@
         android:layout_height="wrap_content">
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginBottom="30dp"
             android:inputType="textPassword"
             android:hint="@string/password"/>
     </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/button_login"
+        android:background="@color/coloryellow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content" android:layout_marginBottom="15dp"
         android:text="@string/login"/>
     <Button
+        android:background="@color/colorwhite"
         android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Jantung</string>
-    <string name="welcome_name">Welcome to Jantung</string>
+    <string name="app_name">Rhythm</string>
+    <string name="welcome_name">Welcome to Rhythm</string>
 
     <!--APP CONFIG-->
     <string name="http_url">http://%s/api</string>
@@ -32,8 +32,8 @@
     <string name="detail">Detail</string>
 
     <!--REGISTER PAGE-->
-    <string name="tutor1">1. Follow first boot instruction of Jantung Device, You should found it in the box</string>
-    <string name="tutor2">2. Fill registration form on Jantung App, Device Id and Password is printed on boot instruction</string>
+    <string name="tutor1">1. Follow first boot instruction of Rhythm Device, You should found it in the box</string>
+    <string name="tutor2">2. Fill registration form on Rhythm App, Device Id and Password is printed on boot instruction</string>
     <string name="tutor3">3. A device is locked to one account only</string>
     <string name="tutor4">4. To add family/friend device simply use add on home page then insert device id and password</string>
     <string name="error_form">"Please fill this field"</string>
@@ -49,7 +49,7 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
-    <string name="terms_check">*By registering, you are agree to Jantung Terms and Conditions
+    <string name="terms_check">*By registering, you are agree to Rhythm Terms and Conditions
         <![CDATA[
             <a href="http://google.com">Read More</a>
         ]]>
