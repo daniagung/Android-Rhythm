@@ -69,20 +69,20 @@ public class RegisterActivity extends AppCompatActivity {
             if (!anyEmpty) {
                 JSONObject patient = new JSONObject();
                 try {
-                    patient.put("username", dataFragment.textUserName.getEditText().getText().toString())
+                    patient.put("email", dataFragment.textUserName.getEditText().getText().toString())
                             .put("password", dataFragment.textUserPassword.getEditText().getText().toString())
-                            .put("full_name", dataFragment.textUserFullName.getEditText().getText().toString())
-                            .put("address", dataFragment.textUserAddress.getEditText().getText().toString())
-                            .put("my_phone", dataFragment.textUserPhone.getEditText().getText().toString())
+                            .put("nama_pasien", dataFragment.textUserFullName.getEditText().getText().toString())
+                            .put("alamat", dataFragment.textUserAddress.getEditText().getText().toString())
+                            .put("id_dokter", dataFragment.spinnerUserDokter.getSelectedItem().toString().equals("Dokter"))
+                            .put("phone", dataFragment.textUserPhone.getEditText().getText().toString())
                             .put("emergency_phone", dataFragment.textUserEmergencyPhone.getEditText().getText().toString())
-                            .put("age", dataFragment.textUserAge.getEditText().getText().toString())
-                            .put("is_male", dataFragment.spinnerUserGender.getSelectedItem().toString().equals("Male"))
+                            .put("usia", dataFragment.textUserAge.getEditText().getText().toString())
+                            .put("jenis_kelamin", dataFragment.spinnerUserGender.getSelectedItem().toString().equals("Laki-Laki"))
                             .put("device_id", dataFragment.textUserDeviceId.getEditText().getText().toString());
 
                     AppSetting.showProgressDialog(RegisterActivity.this, "Registering");
-                    AndroidNetworking.post(AppSetting.getHttpAddress(RegisterActivity.this)
-                            +"/{user}"+getString(R.string.register_url))
-                            .addPathParameter("user", "patient")
+                    AndroidNetworking.post("http://arahsafari.net/telemedicine/mobileapi/getalldata.php?{parameter}")
+                            .addPathParameter("parameter", "data_pasien")
                             .addJSONObjectBody(patient)
                             .setPriority(Priority.MEDIUM)
                             .build()
@@ -95,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
+
+
                                 @Override
                                 public void onError(ANError error) {
                                     dataFragment.textUserName.setError(null);
@@ -177,6 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
         @BindView(R.id.text_user_password) TextInputLayout textUserPassword;
         @BindView(R.id.text_full_name) TextInputLayout textUserFullName;
         @BindView(R.id.text_address) TextInputLayout textUserAddress;
+        @BindView(R.id.spinner_dokter)Spinner spinnerUserDokter;
         @BindView(R.id.text_user_phone) TextInputLayout textUserPhone;
         @BindView(R.id.text_emergency_phone) TextInputLayout textUserEmergencyPhone;
         @BindView(R.id.text_user_age) TextInputLayout textUserAge;

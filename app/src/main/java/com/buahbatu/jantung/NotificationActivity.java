@@ -85,7 +85,7 @@ public class NotificationActivity extends AppCompatActivity {
                 private static final int INCOMING = 801;
                 private static final int OUTGOING = 467;
 
-                @Override
+                 @Override
                 public int getItemViewType(int position) {
                     if (requestList.get(position).getUsername().equals("user")) // from self
                         return OUTGOING;

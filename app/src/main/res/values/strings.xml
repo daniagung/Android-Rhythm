@@ -3,7 +3,8 @@
     <string name="welcome_name">Welcome to Rhythm</string>
 
     <!--APP CONFIG-->
-    <string name="http_url">http://%s/api</string>
+    <string name="http_url">http://%s/telemedicine/mobileapi</string>
+    <!--<string name="http_url">http://arahsafari.net/telemedicine/mobileapi/</string>-->
     <string name="mqtt_url">tcp://%s:1883</string>
     <string name="server_ip_address">192.168.43.12</string>
     <string name="server_http_port">3000</string>
@@ -12,11 +13,13 @@
     <string name="register_url">/register</string>
 
     <!--LOGIN PAGE-->
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="register">Register</string>
+    <string name="dokter">Dokter</string>
+    <string name="phone">Phone</string>
     <string name="create_account">Create Account</string>
     <string name="setup_ip">Setup IP</string>
     <string name="example_ip">192.168.0.1</string>
